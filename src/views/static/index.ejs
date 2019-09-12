@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/application.css">
+    <% include ./partials/head.ejs %>
+  </head>
+  <body>
+
+      <!-- Navigation -->
+      <% include ./partials/navbar.ejs %>
+
+      <!-- Page Content -->
+      <main class="container">
+        
+        <!-- Jumbotron Header -->
+        <header class="jumbotron my-4 text-center">
+          <h1>Blocipedia: Social Markdown Wikis</h1>
+          <p class="">Create and share Markdown Wikis</p>
+          <!-- <a href="#" class="btn btn-primary btn-lg">Sign up</a> -->
+        </header>
+
+        <!-- Page Features -->
+        <section class="row text-center justify-content-around">
+
+          <section class="col-sm-5 card border-primary" >
+            <div class="card-header bg-primary border-primary text-white">Header</div>
+            <div class="card-body text-primary">
+              <h5 class="card-title">Free Plan</h5>
+              <p class="card-text">Create as many public wikis as you want!</p>
+              <a href="#" class="btn btn-primary">Button 1</a>
+            </div>
+          </section>
+
+          <section class="col-sm-5 card border-success">
+            <div class="card-header bg-success border-success text-white">Header</div>
+            <div class="card-body text-success">
+              <h5 class="card-title">Premium Plan</h5>
+              <p class="card-text">Create private wikis!</p>
+              <a href="#" class="btn btn-success">Button 2</a>
+            </div>
+          </section>
+
+        </section>
+        <!-- /.row -->
+
+      </main>
+      <!-- /.container -->
+
+      <% include ./partials/baseScripts.ejs %>
+    </body>
+</html>
