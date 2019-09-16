@@ -9,7 +9,11 @@
        Validation errors:
        <ul>
          <% messages.error.forEach((err) => { %>
-           <li><%= `${err.param} ${err.msg}` %></li>
+          <% if (`${err.param}` == 'undefined'){%>
+            <li><%= `${err}` %></li>
+          <% } else { %>
+            <li><%= `${err.param} ${err.msg}` %></li>
+           <% } %>
          <% }) %>
        </ul>
 

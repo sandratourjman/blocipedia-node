@@ -5,37 +5,6 @@ const validation = require("./validation");
 
 const userController = require("../controllers/userController");
 
-router.use(expressValidator({
-    customValidators: {
-      isUsernameAvailable(username) {
-        return new Promise((resolve, reject) => {
-          User.findOne({ username: username }, (err, user) => {
-            if (err) throw err;
-            if(user == null) {
-              resolve();
-            } else {
-              reject();
-            }
-          });
-        });
-      },
-      isEmailAvailable(email) {
-        return new Promise((resolve, reject) => {
-          User.findOne({ email: email }, (err, user) => {
-            if (err) throw err;
-            if(user == null) {
-              resolve();
-            } else {
-              reject();
-            }
-          });
-        });
-      }
-
-    }
-  })
-);
-
 router.get("/users/sign_up", userController.signUp);
 router.post("/users/sign_up", validation.validateUsers, userController.create);
 
