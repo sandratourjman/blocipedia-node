@@ -7,10 +7,9 @@ module.exports = {
   },
 
   create(req, res, next){
-    
      let newUser = {
        username: req.body.username,
-       email: req.body.email,
+       email: req.body.email.toLowerCase(),
        password: req.body.password,
        passwordConfirmation: req.body.passwordConfirmation
      };
@@ -21,34 +20,37 @@ module.exports = {
          res.redirect("/users/sign_up");
        } else {
          passport.authenticate("local")(req, res, () => {
-           req.flash("notice", "You've successfully signed in!");
+           req.flash("notice", `Welcome to Bloccipedia, ${req.user.name}!`);
            res.redirect("/");
          })
        }
      });
    },
    
-   // signInForm(req, res, next){
-   //   res.render("users/sign_in");
-   // },
+   signInForm(req, res, next){
+     res.render("users/sign_in");
+   },
    
-   // signIn(req, res, next){
-   //   passport.authenticate("local")(req, res, function () {
-   //     if(!req.user){
-   //       req.flash("notice", "Sign in failed. Please try again.")
-   //       res.redirect("/users/sign_in");
-   //     } else {
-   //       req.flash("notice", "You've successfully signed in!");
-   //       res.redirect("/");
-   //     }
-   //   })
-   // },
+   signIn(req, res, next){   
+   console.log("userController line 36");
+      console.log(req); 
+     passport.authenticate("local")(req, res, function () {
 
-   // signOut(req, res, next){
-   //   req.logout();
-   //   req.flash("notice", "You've successfully signed out!");
-   //   res.redirect("/");
-   // },
+       if(!req.user){
+         req.flash("notice", "Sign in failed. Please try again.")
+         res.redirect("/users/sign_in");
+       } else {
+         req.flash("notice", `Welcome back, ${req.user.username}!`);
+         res.redirect("/");
+       }
+     })
+   },
+
+   signOut(req, res, next){
+     req.logout();
+     req.flash("notice", "You've successfully signed out!");
+     res.redirect("/");
+   },
 
    // show(req, res, next){
    //  userQueries.getUser(req.params.id, (err, result) => {

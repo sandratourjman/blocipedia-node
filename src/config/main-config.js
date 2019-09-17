@@ -23,12 +23,12 @@ module.exports = {
 	   }));
 	   app.use(flash());
      passportConfig.init(app);
-     app.use(express.static(path.join(__dirname, "..", "assets")));
-
      app.use((req,res,next) => {
       res.locals.currentUser = req.user;
       next();
-     });
+      });
      app.use(logger('dev'));
+      app.use(express.static(path.join(__dirname, "..", "assets")));
+     
    }
 };

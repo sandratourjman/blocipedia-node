@@ -11,14 +11,14 @@ module.exports = {
 
     return User.create({
     	username: newUser.username,
-      	email: newUser.email,
-      	password: hashedPassword
+      email: newUser.email,
+      password: hashedPassword
     })
     .then((user) => {
       // console.log(user);
       const msg = {
         to: user.email,
-        from: 'sandratourjman@gmail.com',
+        from: 'noreply@blocipedia.com',
         subject: 'Welcome to Blocipedia!',
         text: 'You are now part of our wiki community!',
         html: `<strong>Welcome, ${user.username}</strong>`,
