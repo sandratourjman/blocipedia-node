@@ -32,10 +32,7 @@ module.exports = {
    },
    
    signIn(req, res, next){   
-   console.log("userController line 36");
-      console.log(req); 
      passport.authenticate("local")(req, res, function () {
-
        if(!req.user){
          req.flash("notice", "Sign in failed. Please try again.")
          res.redirect("/users/sign_in");
@@ -43,9 +40,9 @@ module.exports = {
          req.flash("notice", `Welcome back, ${req.user.username}!`);
          res.redirect("/");
        }
-     })
-   },
+     });
 
+   },
    signOut(req, res, next){
      req.logout();
      req.flash("notice", "You've successfully signed out!");
