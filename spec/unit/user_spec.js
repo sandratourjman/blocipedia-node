@@ -21,12 +21,12 @@ describe("User", () => {
     it("should create a User object with a valid email and password", (done) => {
       User.create({
        	username: "user1",
-        email: "user@example.com",
+        email: "user1@example.com",
         password: "123456"
       })
       .then((user) => {
        expect(user.username).toBe("user1");
-        expect(user.email).toBe("user@example.com");
+        expect(user.email).toBe("user1@example.com");
         expect(user.id).toBe(1);
         done();
       })
@@ -38,7 +38,7 @@ describe("User", () => {
 
     it("should not create a user with invalid email or password", (done) => {
       User.create({
-      	username: "user1",
+      	username: "user2",
         email: "It's-a me, Mario!",
         password: "123456"
       })
@@ -57,15 +57,15 @@ describe("User", () => {
     it("should not create a user with an email already taken", (done) => {
 
       User.create({
-      	username: "user1",
-        email: "user@example.com",
+      	username: "user3",
+        email: "user3@example.com",
         password: "123456"
       })
       .then((user) => {
 
         User.create({
-          username: "user1",
-          email: "user@example.com",
+          username: "user4",
+          email: "user3@example.com",
           password: "nananananananananananananananana BATMAN!"
         })
         .then((user) => {
@@ -90,16 +90,16 @@ describe("User", () => {
     it("should not create a user with an username already taken", (done) => {
 
       User.create({
-        username: "user1",
-        email: "user@example.com",
+        username: "user5",
+        email: "user5@example.com",
         password: "123456"
       })
       .then((user) => {
 
         User.create({
-          username: "user1",
-          email: "user1@example.com",
-          password: "nananananananananananananananana BATMAN!"
+          username: "user5",
+          email: "user4@example.com",
+          password: "Superman_beats_Batman!"
         })
         .then((user) => {
           // The code in this block will not be evaluated since the validation error
