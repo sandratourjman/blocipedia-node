@@ -8,9 +8,6 @@ router.get("/users/sign_up", userController.signUp);
 router.post("/users/sign_up", validation.validateUsers, userController.create);
 
 router.get("/users/sign_in", userController.signInForm);
-// router.post("/users/sign_in", userController.signIn);
-
-
 router.post("/users/sign_in", passport.authenticate('local', {
         failureRedirect: '/users/sign_in',
         failureFlash: true

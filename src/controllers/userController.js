@@ -20,7 +20,7 @@ module.exports = {
          res.redirect("/users/sign_up");
        } else {
          passport.authenticate("local")(req, res, () => {
-           req.flash("notice", `Welcome to Bloccipedia, ${req.user.name}!`);
+           req.flash("notice", "You've successfully signed up. Welcome!");
            res.redirect("/");
          })
        }

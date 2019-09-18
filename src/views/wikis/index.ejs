@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+
+    <% include ../static/partials/navbar.ejs %>
+
+    <main class="container">
+
+      <% include ../static/partials/messages.ejs %>
+
+      <h4 class="headings">All Wikis</h4>
+      <a href="/wikis/new" class="btn btn-success">New Wiki</a>
+
+         <div class="row">
+           <div class="col-md-8">
+
+            <table id="wikisTable">
+              <thead>
+                <tr>
+                  <th>Wikis</th>
+                </tr>
+              <thead>
+              <tbody>
+                <% wikis.forEach((wiki) => { %>
+                <tr>
+                  <td><a href="/wikis/<%= wiki.id %>"><%= wiki.title %></a></td>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+           </div>
+         </div>
+    </main>
+
+    <% include ../static/partials/baseScripts.ejs %>
+
+  </body>
+</html>

@@ -15,7 +15,6 @@ module.exports = {
       password: hashedPassword
     })
     .then((user) => {
-      // console.log(user);
       const msg = {
         to: user.email,
         from: 'noreply@blocipedia.com',
