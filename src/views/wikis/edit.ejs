@@ -11,8 +11,15 @@
 
       <% include ../static/partials/messages.ejs %>
 
-         <div class="row">
-           <div class="col-md-8">
+     <!--  <div class="row justify-content-md-center">
+           <div class="col-md-11">
+             <h4 class="headings">All Wikis</h4>
+              <a href="/wikis/new" class="btn btn-success">New Wiki</a>
+           </div>
+      </div> -->
+      <div class="row "></div>
+         <div class="row justify-content-md-center">
+           <div class="col-md-11">
              <h4>Edit Wiki</h4>
 
             <form action="/wikis/<%= wiki.id %>/update" method="post">
@@ -27,6 +34,7 @@
                 <small class="text-muted" id="bodyHelp">Body must be 10 or more characters in length.</small>
               </div>
               <button type="submit" class="btn btn-primary">Update</button>
+              <a href="/wikis/<%= wiki.id %>/" type="button" class="btn btn-secondary">Cancel</a>
             </form>
 
            </div>

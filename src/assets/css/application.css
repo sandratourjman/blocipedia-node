@@ -18,7 +18,7 @@ body {
 }
 
 #wikisTable td, #wikisTable th {
-  border: 1px solid #ddd;
+  /*border: 1px solid #ddd;*/
   padding: 8px;
 }
 
@@ -26,15 +26,12 @@ body {
 
 #wikisTable tr:hover {background-color: #ddd;}
 
-#wikisTable th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #007bff!important;
-  color: white;
-}
 
+
+
+
+/* Mobile
 @media (max-width: @screen-xs-max) {  }
 @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {  }
 @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {  }
-@media (min-width: @screen-lg-min) {  }
+@media (min-width: @screen-lg-min) {  }*/

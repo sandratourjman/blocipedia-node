@@ -11,22 +11,40 @@
 
       <% include ../static/partials/messages.ejs %>
 
-      <h4 class="headings">All Wikis</h4>
-      <a href="/wikis/new" class="btn btn-success">New Wiki</a>
+      <div class="row justify-content-md-center">
+           
+      </div>
 
-         <div class="row">
-           <div class="col-md-8">
+      <div class="row justify-content-md-center align-middle" >
+           <div class="col-md-11">
+             <h4 style="display: inline-block; margin-right:10px">All Wikis</h4>
+             
+              <a href="/wikis/new" class="btn btn-success btn-sm">New Wiki</a>
+    
+           </div>
+      </div>
+
+         <div class="row justify-content-md-center">
+           <div class="col-md-11">
 
             <table id="wikisTable">
               <thead>
                 <tr>
-                  <th>Wikis</th>
+                  <col>
+                  <col style="width:10%">
+                  <col style="width:10%">
                 </tr>
               <thead>
               <tbody>
                 <% wikis.forEach((wiki) => { %>
                 <tr>
                   <td><a href="/wikis/<%= wiki.id %>"><%= wiki.title %></a></td>
+                  <td><a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning btn-sm">Edit Wiki</a></td>
+                  <td>
+                    <form style="display:initial" action="/wikis/<%= wiki.id %>/destroy" method="post">
+                      <button type="submit" class="btn btn-danger btn-sm">Delete Wiki</button>
+                    </form>
+                  </td>
                 </tr>
                 <% }) %>
               </tbody>

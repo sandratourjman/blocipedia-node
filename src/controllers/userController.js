@@ -1,5 +1,9 @@
 const userQueries = require("../db/queries.users.js");
 const passport = require("passport");
+const secretKey = process.env.STRIPE_SECRET_KEY;
+const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
+const stripe = require("stripe")(secretKey);
+
 
 module.exports = {
   signUp(req, res, next){
@@ -49,15 +53,41 @@ module.exports = {
      res.redirect("/");
    },
 
-   // show(req, res, next){
-   //  userQueries.getUser(req.params.id, (err, result) => {
+   show(req, res, next) {
+    res.render("users/show");
+   },
 
-   //    if(err || result.user === undefined){
-   //      req.flash("notice", "No user found with that ID.");
-   //      res.redirect("/");
-   //    } else {
+   // change to secret key in production
+   upgradeForm(req, res, next) {
+    res.render("users/upgrade", {publishableKey});
+   },
 
-   //      res.render("users/show", {...result});
-   //    }
-   //  });
+   upgrade(req, res, next) {
+    stripe.customers.create({
+      email: req.body.stripeEmail,
+      source: req.body.stripeToken
+    })
+    .then((customer) => {
+      stripe.charges.create({
+        amount: 1500,
+        currency: "usd",
+        customer: customer.id,
+        description: "Premium membership"
+      })
+    })
+    .then((charge) => {
+      userQueries.upgradeUser(req.user.dataValues.id);
+      res.render("users/upgrade_success");
+    })
+
+   },
+
+   downgrade(req, res, next) {
+    userQueries.downgradeUser(req.user.dataValues.id);
+    req.flash("notice", "You've successfully downgraded your account.");
+    res.redirect("/users/:id");
+
+   }
+
+   
 }

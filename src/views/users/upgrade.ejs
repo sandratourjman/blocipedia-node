@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body>
+
+    <% include ../static/partials/navbar.ejs %>
+    <div class="row"></div>
+
+    <main class="container">
+
+      <% include ../static/partials/messages.ejs %>
+
+         
+       <div class="row justify-content-md-center">
+        <div class="col-md-11">
+
+         <h4>Upgrade Form</h4>
+         <p>Upgrade your account to Premium for more features!</p>
+
+         <p>For $15/month, you can create private Wikis and collaborate with other members!</p>
+
+          
+         <div>
+        <h6>Upgrade to Premium:</h6>
+        <form action="/users/<%= currentUser.id %>/upgrade" method="POST">
+        <script 
+          src="https://checkout.stripe.com/checkout.js" 
+          class="stripe-button" 
+          data-key="pk_test_rmezk7E6FaU0iOYkeVD7SMuW00hs2bEjGu"
+          data-amount="1500" 
+          data-name="Blocipedia" 
+          data-description="Upgrade to Premium Account" 
+          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+          data-locale="auto"
+          data-label="Upgrade">
+        </script>
+        </form>
+        </div>
+        <div class="row"></div><div class="row"></div>
+
+    
+        <small><div class="card border-success mb-3" style="max-width: 20rem;">
+          <div class="card-body text-success">
+            <p class="card-title">Test CC Info</p>
+            <p class="card-subtitle mb-2 text-muted">For testing only</p>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Card Number: <strong>4242 4242 4242 4242</strong></li>
+                <li class="list-group-item" id="date">Exp. Date:  </li>
+                <li class="list-group-item">CVC: 123</li>
+              </ul> 
+          </div>
+        </div></small>
+
+        <script type="text/javascript">
+          var d = new Date();
+          var m = d.getMonth() + 1 ;
+          var y = d.getFullYear() + 1;
+          document.getElementById("date").innerHTML += m + "/" + y;
+        </script>
+
+        <div class="row"></div><div class="row"></div>
+
+         <div class="row">
+          <div class="col-md-11">
+          <a href="/" class="btn btn-outline-dark btn-sm" style="margin-right: 10px">Back to Home</a>
+          <a href="/wikis" class="btn btn-outline-dark btn-sm">Back to Wikis</a>
+           </div>
+         </div>
+
+
+       </div>
+      </div>
+    </main>
+
+    <% include ../static/partials/baseScripts.ejs %>
+
+  </body>
+</html>
