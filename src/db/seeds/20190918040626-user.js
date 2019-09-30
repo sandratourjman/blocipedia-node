@@ -19,7 +19,35 @@ for(let i = 1 ; i <= 20 ; i++){
  });
 }
 
+// admin user
+users.push({
+    username: "admin",
+    email: "admin@example.com",
+    password: bcrypt.hashSync(plainPassword, salt),
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    role: "admin",
+ });
 
+// standard user 
+users.push({
+    username: "standard",
+    email: "standard@example.com",
+    password: bcrypt.hashSync(plainPassword, salt),
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    role: "standard",
+ });
+
+//premium user
+users.push({
+    username: "premium",
+    email: "premium@example.com",
+    password: bcrypt.hashSync(plainPassword, salt),
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    role: "premium",
+ });
 
 
 module.exports = {

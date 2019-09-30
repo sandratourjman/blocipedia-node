@@ -15,10 +15,12 @@
        <div class="row justify-content-md-center">
          <div class="col-md-11">
            <a href="/wikis" class="btn btn-primary btn-sm">Back</a>
-           <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning btn-sm">Edit</a>
-          <form style="display:initial" action="/wikis/<%= wiki.id %>/destroy" method="post">
-            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-          </form>
+           <% if(currentUser && (currentUser.role === 'admin' || wiki.userId === currentUser.id)) { %>
+             <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning btn-sm">Edit</a>
+            <form style="display:initial" action="/wikis/<%= wiki.id %>/destroy" method="post">
+              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+          <% }%>
          </div>
        </div>
 

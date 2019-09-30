@@ -36,6 +36,7 @@ module.exports = {
             req.flash("notice", "You are noth authorized to do that");
             res.redirect("/wikis");
         }
+        console.log(req.body.private);
 	    
     },
     show(req, res, next){
@@ -71,6 +72,17 @@ module.exports = {
                 res.redirect(401, `/wikis/${req.params.id}/edit`);
             } else {
                 res.redirect(`/wikis/${req.params.id}`);
+            }
+        });
+    },
+
+    privateWiki(req, res, next){
+        wikiQueries.getAllWikis((err, wikis) => {
+            if(err){
+                res.redirect(500, "wikis/show");
+                console.log("wiki controller line 83");
+            } else {
+                res.render('wikis/private', {wikis});
             }
         });
     }

@@ -10,6 +10,7 @@ for(let i = 1 ; i <= 15 ; i++){
    body: faker.random.words(11),
    createdAt: new Date(),
    updatedAt: new Date(),
+   private: false,
    userId: faker.random.number({min:1, max:20}),
  });
 }

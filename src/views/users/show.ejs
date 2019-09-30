@@ -48,12 +48,12 @@
               <p>You are currently a standard user. If you want to create private wikis, please upgrade to a premium account.</p>
               <a href="/users/<%= currentUser.id %>/upgrade" class="btn btn-success btn-sm">Upgrade</a>
             <% } else if (currentUser.role === "premium") { %>
-             <p>You are currently a premium user. Please confirm to downgrade to a standard account?</p>
+             <p>You are currently a premium user. Please confirm to downgrade to a standard account.</p>
              <form style="display:initial" action="/users/<%= currentUser.id %>/downgrade" method="post">
                <button type="submit" class="btn btn-danger btn-sm">Downgrade Account</button>
             </form>
             <br>
-            <small>Private Wikis Features will no longer be available.</small>
+            <small>Private Wikis Features will no longer be available and private wikis will be made public.</small>
            <% } %>
 
            <div class="row"></div><div class="row"></div>

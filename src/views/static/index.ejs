@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <% include ./partials/head.ejs %>
+    <script src="https://kit.fontawesome.com/ea4f855536.js" crossorigin="anonymous"></script>
   </head>
   <body>
 
@@ -12,6 +13,7 @@
       <main class="container">
         <% include ../static/partials/messages.ejs %>
         
+        <% if(!currentUser) { %>
         <!-- Jumbotron Header -->
         <header class="jumbotron my-4 text-center">
           <h1>Blocipedia: Social Markdown Wikis</h1>
@@ -21,25 +23,62 @@
 
         <!-- Page Features -->
         <section class="row text-center justify-content-around">
-
-          <section class="col-sm-5 card border-primary" >
-            <div class="card-header bg-primary border-primary text-white">Header</div>
-            <div class="card-body text-primary">
+          <div class="col-sm-5 card text-white bg-primary mb-3" >
+            <div class="card-header"><i class="fas fa-user fa-3x"></i></div>
+            <div class="card-body">
               <h5 class="card-title">Free Plan</h5>
               <p class="card-text">Create as many public wikis as you want!</p>
             </div>
-          </section>
+          </div>
 
-          <section class="col-sm-5 card border-success">
-            <div class="card-header bg-success border-success text-white">Header</div>
-            <div class="card-body text-success">
+          <div class="col-sm-5 card text-white bg-success mb-3">
+            <div class="card-header"><i class="fas fa-user-shield fa-3x"></i></div>
+            <div class="card-body">
               <h5 class="card-title">Premium Plan</h5>
               <p class="card-text">Create private wikis!</p>
             </div>
-          </section>
-
+          </div>
         </section>
-        <!-- /.row -->
+       <% } else { %>
+        <header class="jumbotron my-4 text-center">
+          <h4><%= currentUser.username %>'s Dashboard</h4>
+          <hr>
+
+          <section class="row text-center justify-content-around">
+
+            <div class="col-sm-3 card text-white bg-primary mb-3">
+              <a type="button" class="btn text-white" href="/wikis">
+                <div class="card-header">Public Wikis</div>
+                <div class="card-body">
+                  <h6 class="card-title">View public wikis</h6>
+                </div>
+              </a>
+            </div>
+          
+            <% if(currentUser && currentUser.role != "standard") { %>
+            <div class="col-sm-3 card text-white bg-success mb-3">
+              <a type="button" class="btn text-white" href="/wikis/private">
+                <div class="card-header">Private Wikis</div>
+                <div class="card-body">
+                  <h6 class="card-title">View your private wikis</h6>
+                </div>
+              </a>
+            </div>
+            <% } %>
+
+             <div class="col-sm-3 card text-white bg-secondary mb-3">
+              <a type="button" class="btn text-white" href="/users/<%= currentUser.id %>">
+                <div class="card-header">Profile</div>
+                <div class="card-body">
+                  <h6 class="card-title">Edit Profile Settings</h6>
+                </div>
+              </a>
+            </div>
+         </section>
+          
+        </header>
+
+       <% }%>
 
       </main>
       <!-- /.container -->

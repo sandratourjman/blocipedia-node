@@ -11,12 +11,6 @@
 
       <% include ../static/partials/messages.ejs %>
 
-     <!--  <div class="row justify-content-md-center">
-           <div class="col-md-11">
-             <h4 class="headings">All Wikis</h4>
-              <a href="/wikis/new" class="btn btn-success">New Wiki</a>
-           </div>
-      </div> -->
       <div class="row "></div>
          <div class="row justify-content-md-center">
            <div class="col-md-11">
@@ -33,6 +27,26 @@
                 <textarea rows="4" class="form-control" name="body" placeholder="Enter body"><%= wiki.body %></textarea>
                 <small class="text-muted" id="bodyHelp">Body must be 10 or more characters in length.</small>
               </div>
+              <% if(currentUser && (currentUser.role === "premium" || currentUser.role === 'admin') && wiki.userId === currentUser.id) { %>
+                <div class="form-group">
+                <label for="private">Wiki Status</label>
+
+                <% if(wiki.private == true ) { %>
+                  <div class="form-group row">
+                    <small><p class="col-sm-12">Currently Private?: <span class="text-success">Yes</span></p></small>
+                  </div>
+                <% } else { %>
+                  <div class="form-group row">
+                    <small><p class="col-sm-12">Currently Private?: <span class="text-danger">No</span></p></small>
+                  </div>
+                <% }%>
+                <select class="form-control" name="private">
+                    <option value="false">Public</option>
+                    <option value="true">Private</option>
+                </select>
+            </div>
+              <% } %>
+              <div class="row"></div>
               <button type="submit" class="btn btn-primary">Update</button>
               <a href="/wikis/<%= wiki.id %>/" type="button" class="btn btn-secondary">Cancel</a>
             </form>
