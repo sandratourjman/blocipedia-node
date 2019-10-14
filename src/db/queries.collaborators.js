@@ -6,12 +6,16 @@ const Authorizer = require("../policies/application");
 module.exports = {
 
     createCollaborator(req, callback) {
+        // console.log("queries collab line 9");
+        // console.log(req);
         User.findOne({
             where: {
                 username: req.body.collaborator
             }
+
         })
             .then((user) => {
+                console.log(user);
                 if (!user) {
                     return callback("User does not exist")
                 }

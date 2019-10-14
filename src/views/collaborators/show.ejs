@@ -22,7 +22,7 @@
 
             <p> Current Collaborators</p>
 
-            <% if(collaborators != "") { %>
+            <% if(collaborators) { %>
               <table id="collabsTableRemove">
                   <thead>
                     <tr>
@@ -32,10 +32,10 @@
                     </tr>
                   <thead>
                   <tbody>
-                    <% const allUsers = users.filter(user => user.role == "standard" ) %>
-                      <% allUsers.forEach((user) => {  %>
+                    <% const allCollaborators = collaborators.filter(collaborator => collaborator.role == "standard" ) %>
+                      <% allCollaborators.forEach((collaborator) => {  %>
                       <tr>
-                        <td><%= collaborator.username %></td>
+                        <td><%= collaborator.userId %></td>
                         <td><%= collaborator.email %></td>
                         <td>
                           <form style="display:initial" action="/wikis/<%= wiki.id %>/collaborators/destroy" method="post">
@@ -49,6 +49,7 @@
             <% } else { %>
             <small><p style="color:red;">No current collaborators. Add Collaborators from list below</p></small>
             <% } %>
+            <hr>
             <p> Add a New Collaborator</p>
 
               <table id="collabsTable">
@@ -60,14 +61,14 @@
                   </tr>
                 <thead>
                 <tbody>
-                    <% const allUsers = users.filter(user => user.role == "standard" ) %>
+                    <% const allUsers = users.filter(user => user.role == "standard"  ) %>
                     <% allUsers.forEach((user) => {  %>
                     <tr>
                       <td><%= user.username %></td>
                       <td><%= user.email %></td>
                       <td>
                         <form style="display:initial" action="/wikis/<%= wiki.id %>/collaborators/create" method="post">
-                          <button type="submit" class="btn btn-success btn-sm" value="<%= user.id %>">Add Collaborator</button>
+                          <button type="submit" class="btn btn-success btn-sm" name="collaborator" value="<%= user.username %>">Add Collaborator</button>
                         </form>
                       </td>
                     </tr>

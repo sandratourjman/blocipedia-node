@@ -31,6 +31,12 @@
           <!-- <small><p>Created on: <%= wiki.createdAt %> | Last Updated: <%= wiki.updatedAt %></p></small> -->
           <p><%- wiki.body %></p>
         </div>
+
+        <div class="col-md-11">
+           <% if(wiki.private) { %>
+                <a href="/wikis/<%= wiki.id %>/collaborators" class="btn btn-warning btn-sm">Edit Collaborators</a>
+            <% } %>
+        </div>
       </div>
     </main>
 

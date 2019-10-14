@@ -1,6 +1,7 @@
 const collaboratorQueries = require("../db/queries.collaborators.js");
 const Authorizer = require("../policies/wiki");
 const wikiQueries = require("../db/queries.wikis.js");
+const userQueries = require('../db/queries.users');
 
 
 module.exports = {
@@ -9,10 +10,6 @@ module.exports = {
             if (err) {
                 req.flash("error", err);
             }
-            console.log(req);
-            console.log("collab controler line 13");
-            console.log(collaborator);
-
             res.redirect(req.headers.referer);
         });
     },
@@ -23,14 +20,11 @@ module.exports = {
             } else {
                 wiki = result["wiki"];
                 collaborators = result["collaborators"];
-                const authorized = new Authorizer(req.user, wiki, collaborators).edit();
-                if (authorized) {
-                    res.render("collaborators/show", { wiki, collaborators });
-                } else {
-                    req.flash("notice", "You are not authorized to do that.");
-                    res.redirect(`/wikis/${req.params.wikiId}`);
-                }
-                
+     
+                userQueries.getAllUsers((err, result) => {
+                    users = result['users'];
+                    res.render("collaborators/show", {wikis, collaborators, users});
+                });
             }
         });
     },
