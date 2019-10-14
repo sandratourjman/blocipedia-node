@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+
+    <% include ../static/partials/navbar.ejs %>
+
+    <main class="container">
+
+      <% include ../static/partials/messages.ejs %>
+
+      <div class="row"></div>
+
+       <div class="row justify-content-md-center">
+          <div class="col-md-11">
+          <h4> Collaborations</h4>
+          <% if(collaborations.length !== 0) { %>
+          <ul class="list-group">
+              <% collaborations.forEach((collaboration) => {  %>
+              <li class="list-group-item">
+                  <a href="/wikis/<%= collaboration.wikiId %>">
+                      <%= collaboration.Wiki.title %></a>
+              </li>
+              <% }) %>
+          </ul>
+          <% } else { %>
+            <p>No one has collaborated with you yet.</p>
+          <% } %>
+
+           </div>
+       </div>
+  </main>
+
+  <% include ../static/partials/baseScripts.ejs %>
+
+</body>
+</html>

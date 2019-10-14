@@ -1,4 +1,5 @@
 const User = require("./models").User;
+const Collaborator = require("./models").Collaborator;
 const bcrypt = require("bcryptjs");
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -30,6 +31,18 @@ module.exports = {
       callback(err);
     })
   },
+
+  getAllUsers(callback){
+    let result = {};
+    return User.findAll()
+    .then(users => {
+      result['users'] = users;
+      callback(null, result);
+    })
+    .catch(err => {
+      callback(err);
+    });
+  },
   
   getUser(id, callback){
   	let result = {};
@@ -39,14 +52,16 @@ module.exports = {
         	callback(404);
       	} else {
       		result["user"] = user;
-
-          Wiki.scope({ method: ["userWikis", id]}).all();
-          then((wikis) => {
-            result['wikis'] = wikis;
-            callback(err);
+          Collaborator.scope({ method: ['collaboratorsFor', id] }).findAll()
+          .then(collaborations => {
+            result['collaborations'] = collaborations;
+            callback(null, result);
           })
-    	}
-  	});
+          .catch(err => {
+            callback(err);
+          });
+      }
+    });
   },
 
   upgradeUser(id, callback) {

@@ -28,7 +28,7 @@ module.exports = {
       next();
       });
      app.use(logger('dev'));
-      app.use(express.static(path.join(__dirname, "..", "assets")));
+     app.use(express.static(path.join(__dirname, "..", "assets")));
      
    }
 };

@@ -11,20 +11,26 @@ body {
 	float:left;
 }
 /* Wiki Table */
-#wikisTable {
+#wikisTable, #collabsTable {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
 
-#wikisTable td, #wikisTable th {
+#wikisTable td, #wikisTable th,  #collabsTable td, #collabsTable th{
   /*border: 1px solid #ddd;*/
   padding: 8px;
 }
 
+#collabsTable th {
+	background-color: #f2f2f2;
+}
+
 #wikisTable tr:nth-child(even){background-color: #f2f2f2;}
+#collabsTable tr:nth-child(even){background-color: #f2f2f2;}
 
 #wikisTable tr:hover {background-color: #ddd;}
+#collabsTable tr:hover {background-color: #ddd;}
 
 
 

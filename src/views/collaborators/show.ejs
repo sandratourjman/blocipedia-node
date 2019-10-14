@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+
+    <% include ../static/partials/navbar.ejs %>
+
+    <main class="container">
+
+      <% include ../static/partials/messages.ejs %>
+
+      <div class="row"></div>
+
+      <div class="row justify-content-md-center">
+        <div class="col-md-11">
+          <% if(wiki.private) { %>
+            <h4>Collaborators for <%= wiki.title %> Wiki</h4>
+            <hr>
+            <% if(currentUser.role === "admin" || (currentUser.role === "premium" && wiki.userId === currentUser.id)) { %>
+
+            <p> Current Collaborators</p>
+
+            <% if(collaborators != "") { %>
+              <table id="collabsTableRemove">
+                  <thead>
+                    <tr>
+                      <th scope="col">Username</th>
+                      <th scope="col">Email</th>
+                      <th scope="col" style="width:15%" class="align-center">Remove Access</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    <% const allUsers = users.filter(user => user.role == "standard" ) %>
+                      <% allUsers.forEach((user) => {  %>
+                      <tr>
+                        <td><%= collaborator.username %></td>
+                        <td><%= collaborator.email %></td>
+                        <td>
+                          <form style="display:initial" action="/wikis/<%= wiki.id %>/collaborators/destroy" method="post">
+                            <button type="submit" class="btn btn-danger btn-sm">Remove Collaborator</button>
+                          </form>
+                        </td>
+                      </tr>
+                      <% }) %>
+                  </tbody>
+                </table>
+            <% } else { %>
+            <small><p style="color:red;">No current collaborators. Add Collaborators from list below</p></small>
+            <% } %>
+            <p> Add a New Collaborator</p>
+
+              <table id="collabsTable">
+                <thead>
+                  <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col" style="width:15%" class="align-center">Give Access</th>
+                  </tr>
+                <thead>
+                <tbody>
+                    <% const allUsers = users.filter(user => user.role == "standard" ) %>
+                    <% allUsers.forEach((user) => {  %>
+                    <tr>
+                      <td><%= user.username %></td>
+                      <td><%= user.email %></td>
+                      <td>
+                        <form style="display:initial" action="/wikis/<%= wiki.id %>/collaborators/create" method="post">
+                          <button type="submit" class="btn btn-success btn-sm" value="<%= user.id %>">Add Collaborator</button>
+                        </form>
+                      </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+              </table>
+
+
+              <% } %> <!-- role -->
+              <% } %> <!-- wiki.private -->
+            </div>
+         </div>
+    </main>
+
+    <% include ../static/partials/baseScripts.ejs %>
+
+  </body>
+</html>

@@ -89,6 +89,21 @@ module.exports = {
     req.flash("notice", "You've successfully downgraded your account.");
     res.redirect("/users/:id");
 
+   },
+
+   showCollaborations(req, res, next) {
+    userQueries.getUser(req.user.id, (err, result) => {
+      console.log("user controller line 96");
+      console.log(result);
+      user = result["user"];
+      collaborations = result["collaborations"];
+
+      if (err || user == null) {
+        res.redirect(404, "/");
+      } else {
+        res.render("users/collaborations", {user, collaborations });
+      }
+    })
    }
 
    
