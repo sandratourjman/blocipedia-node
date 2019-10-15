@@ -93,8 +93,6 @@ module.exports = {
 
    showCollaborations(req, res, next) {
     userQueries.getUser(req.user.id, (err, result) => {
-      console.log("user controller line 96");
-      console.log(result);
       user = result["user"];
       collaborations = result["collaborations"];
 

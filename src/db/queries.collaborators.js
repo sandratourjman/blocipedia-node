@@ -6,42 +6,39 @@ const Authorizer = require("../policies/application");
 module.exports = {
 
     createCollaborator(req, callback) {
-        // console.log("queries collab line 9");
-        // console.log(req);
         User.findOne({
             where: {
                 username: req.body.collaborator
             }
-
         })
-            .then((user) => {
-                console.log(user);
-                if (!user) {
-                    return callback("User does not exist")
+        .then((user) => {
+            console.log(user);
+            if (!user) {
+                return callback("User does not exist")
+            }
+            Collaborator.findOne({
+                where: {
+                    userId: user.id,
+                    wikiId: req.params.wikiId
                 }
-                Collaborator.findOne({
-                    where: {
+            })
+                .then((collaborator) => {
+                    if (collaborator) {
+                        return callback('This user is already a collaborator on this wiki.')
+                    }
+                    let newCollaborator = {
                         userId: user.id,
                         wikiId: req.params.wikiId
-                    }
+                    };
+                    return Collaborator.create(newCollaborator)
+                        .then((collaborator) => {
+                            callback(null, collaborator);
+                        })
+                        .catch((err) => {
+                            callback(err, null);
+                        })
                 })
-                    .then((collaborator) => {
-                        if (collaborator) {
-                            return callback('This user is already a collaborator on this wiki.')
-                        }
-                        let newCollaborator = {
-                            userId: user.id,
-                            wikiId: req.params.wikiId
-                        };
-                        return Collaborator.create(newCollaborator)
-                            .then((collaborator) => {
-                                callback(null, collaborator);
-                            })
-                            .catch((err) => {
-                                callback(err, null);
-                            })
-                    })
-            })
+        })
     },
 
     deleteCollaborator(req, callback) {
