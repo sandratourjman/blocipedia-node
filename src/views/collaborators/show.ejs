@@ -62,7 +62,8 @@
                 <thead>
                 <tbody>
 
-                    <% const allUsers = users.filter(user => user.role == "standard") %>
+<% var allUsers=(function(){const collabs=users.filter(user=>user.role=="standard");for(var i=0;i < collabs.length;i++){for(var x=0;x < collaborators.length;x++){if(collabs[i].id==collaborators[x].userId){collabs.splice(i,1)}}}
+return(collabs)})() %>
                     <% allUsers.forEach((user) => {  %>
                     
                     <tr>

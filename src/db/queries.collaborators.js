@@ -12,7 +12,6 @@ module.exports = {
             }
         })
         .then((user) => {
-            console.log(user);
             if (!user) {
                 return callback("User does not exist")
             }

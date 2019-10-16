@@ -23,6 +23,7 @@ module.exports = {
      
                 userQueries.getAllUsers((err, result) => {
                     users = result['users'];
+
                     res.render("collaborators/show", {wikis, collaborators, users});
                 });
             }

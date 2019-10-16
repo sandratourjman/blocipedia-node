@@ -16,11 +16,13 @@
        <div class="row justify-content-md-center">
          <div class="col-md-11">
            <a href="/wikis" class="btn btn-primary btn-sm">Back</a>
-           <% if(currentUser && (currentUser.role === 'admin' || wiki.userId === currentUser.id)) { %>
+           <% if(currentUser) { %>
              <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning btn-sm">Edit</a>
+             <% if (currentUser.role === 'admin' || wiki.userId === currentUser.id){ %>
             <form style="display:initial" action="/wikis/<%= wiki.id %>/destroy" method="post">
               <button type="submit" class="btn btn-danger btn-sm">Delete</button>
             </form>
+            <% }%>
           <% }%>
          </div>
        </div>
@@ -33,7 +35,7 @@
         </div>
 
         <div class="col-md-11">
-           <% if(wiki.private) { %>
+           <% if(wiki.private && (currentUser.role === 'admin' || wiki.userId === currentUser.id)) { %>
                 <a href="/wikis/<%= wiki.id %>/collaborators" class="btn btn-warning btn-sm">Edit Collaborators</a>
             <% } %>
         </div>
